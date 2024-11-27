@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedHelp</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4CAF50;
+            flex: 1;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            flex: 2;
+            justify-content: center;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .account {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .account-btn {
+            background: #4CAF50;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-right: 40px;
+        }
+
+        .account-btn:hover {
+            background: #45a049;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 1;
+            padding: 10px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .account:hover .dropdown-content {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .account:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://static.vecteezy.com/system/resources/previews/005/243/579/non_2x/double-exposure-of-success-smart-medical-doctor-working-with-abstract-blurry-bokeh-background-as-concept-free-photo.jpg') no-repeat center center/cover;
+            height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            padding: 0 10%;
+            box-sizing: border-box;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.5;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .btn {
+            padding: 15px 30px;
+            background: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.3s, transform 0.3s;
+            font-size: 1rem;
+            font-weight: 600;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .btn:hover {
+            background: #45a049;
+            transform: translateY(-5px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .features h2 {
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* Card Styles */
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .card {
+            width: 300px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background-color: #6aee6f;
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+
+        .card h3 {
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card p {
+            padding: 0 20px 20px;
+            color: #777;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .about h2 {
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: auto;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #bbb;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .hero {
+                padding: 0 20px;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .account {
+                flex: 0;
+            }
+
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">MedHelp</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('med_history') }}">Medical History</a></li>
+            <li><a href="{{ url_for('book_appointment') }}">Book Appointment</a></li>
+            <li><a href="{{ url_for('userlogin') }}">Login</a></li>
+        </ul>
+        <div class="account">
+            <button class="account-btn"><i class="fas fa-user-circle"></i></button>
+            <div class="dropdown-content">
+                <a href="#">My Profile</a>
+                <a href="{{ url_for('login') }}">Doctor Sign-In</a>
+                <a href="{{ url_for('book_appointment') }}">Nearby Doctors</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to MedHelp</h1>
+            <p>Connecting Patients and Doctors for Better Healthcare Management. Your Health, Our Priority.</p>
+            <a href="{{ url_for('book_appointment') }}" class="btn">Book Appointment</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Book Appointments</h3>
+                    <p>Schedule a consultation with a doctor of your choice at your convenience.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3>Medical History</h3>
+                    <p>Access your past appointments, test results, and prescriptions anytime.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <h3>Follow-Up Appointments</h3>
+                    <p>Easily schedule follow-up appointments with your preferred doctor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>At MedHelp, we are dedicated to bridging the gap between patients and healthcare providers. Our platform offers a seamless experience for booking appointments, accessing medical history, and managing your health records. We believe in making healthcare accessible and convenient for everyone.</p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>MedHelp</h3>
+                <p>Your trusted partner in healthcare management. We are committed to providing the best services to ensure your well-being.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MedHelp. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Navbar on Scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Cards Animation on Scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.card');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
